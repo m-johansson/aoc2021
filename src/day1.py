@@ -1,12 +1,12 @@
 import typing
 import pathlib
 import itertools
-import utils.iterations as iterations
+from src.utils import iterations
 
 
 def count_depth_increases() -> int:
     src_dir = pathlib.Path(__file__).parent
-    with open(src_dir / "inputs/day1.txt", "r") as in_:
+    with open(src_dir / "inputs/day1.txt", "tr") as in_:
         depths: typing.Iterator[int] = (int(line) for line in in_)
         sums = (sum(window) for window in iterations.sliding_window(depths, 3))
         increases = sum((1 for x, y in itertools.pairwise(sums) if x < y))

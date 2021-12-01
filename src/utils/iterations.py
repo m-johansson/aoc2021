@@ -1,7 +1,4 @@
 import collections
-
-
-import collections
 import itertools
 
 # lifted from https://docs.python.org/3/library/itertools.html
