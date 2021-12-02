@@ -1,6 +1,7 @@
-import typing
-import pathlib
 import itertools
+import pathlib
+import typing
+
 from src.utils import iterations
 
 
