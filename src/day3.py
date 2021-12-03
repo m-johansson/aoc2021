@@ -2,7 +2,7 @@ import pathlib
 from typing import Iterable, List
 
 
-def binary_generator(rel_path: str) -> str:
+def binary_str_generator(rel_path: str) -> str:
     src_dir = pathlib.Path(__file__).parent
     with open(src_dir / rel_path, "tr") as in_:
         yield from (line.strip() for line in in_)
@@ -29,7 +29,7 @@ def get_gamma_and_epsilon(string_generator: Iterable):
 
 
 if __name__ == "__main__":
-    bin_gen = binary_generator("inputs/day3.txt")
+    bin_gen = binary_str_generator("inputs/day3.txt")
     gamma, epsilon = get_gamma_and_epsilon(bin_gen)
     print(f"{gamma=} {epsilon=}")
     print(gamma * epsilon)
