@@ -41,8 +41,7 @@ def search_with_bit_condition(input_list: List[str], bit_index:int=0, least:bool
 
 
 if __name__ == "__main__":
-    bin_gen = binary_str_generator("inputs/day3.txt")
-    in_ = list(bin_gen)
+    in_ = list(binary_str_generator("inputs/day3.txt"))
     oxygen = int(search_with_bit_condition(in_, bit_index=0, least=False),2)
     co2_scrubber = int(search_with_bit_condition(in_, bit_index=0, least=True),2)
     print(f"{oxygen=}, {co2_scrubber=}, {oxygen*co2_scrubber=}")
