@@ -1,4 +1,4 @@
-from typing import Iterable, Iterator, Sequence, TextIO, Tuple, List
+from typing import Iterator, Tuple, List
 import pathlib
 
 
