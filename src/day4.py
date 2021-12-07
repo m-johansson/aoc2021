@@ -13,7 +13,7 @@ class BingoBoard:
         for row in row_generator:
             self.rows.append(list(row))
         for i in range(len(self.rows)):
-            self.columns.append(list())
+            self.columns.append([])
         for el in self.rows:
             for in_, i in enumerate(el):
                 self.columns[in_].append(i)
@@ -69,10 +69,10 @@ class InputReader:
         self,
     ):
         with open(self._basepath / self.filepath, "tr") as fid:
-            for i in range(2):
-                _ = fid.readline()  # throw away sequence and empty line
+            for _ in range(2):
+                fid.readline()  # throw away sequence and empty line
             while True:
-                board = list()
+                board = []
                 while (line := fid.readline()) not in ("\n", ""):
                     board.append(list(map(lambda x: int(x), line.split())))
                 yield board
@@ -80,19 +80,19 @@ class InputReader:
                     return
 
 
-def play(boards: list[BingoBoard], draws):
+def play(input_boards: list[BingoBoard], draws):
     bingo = []
     for draw in draws:
         print(draw)
-        for board in boards:
+        for board in input_boards:
             board.draw(draw)
             if board.check_bingo():
                 bingo.append(board)
         for board in bingo:
-            if len(boards) == 1:
+            if len(input_boards) == 1:
                 print(f"{board.id=}:{board.score(draw)=}")
                 return
-            boards.remove(board)
+            input_boards.remove(board)
         bingo = []
 
 
