@@ -23,7 +23,7 @@ class Row:
         try:
             self.unsolved_digits.pop(digit)
         except KeyError:
-            pass  # this happens for 6 or 0
+            pass  # this happens dependent solvers
 
 
 def is_zero(input_str: str, wire_counts, row: Row):
@@ -96,7 +96,6 @@ def is_nine(input_str, wire_counts):
 
 
 def independent_solve(in_str: str, row: Row, wire_counts: dict):
-    # import ipdb; ipdb.set_trace()
     for digit, solver in row.unsolved_digits.copy().items():
         if solver(in_str, wire_counts):
             row.solve_digit(in_str, digit)
@@ -121,14 +120,11 @@ def main():
             else:
                 raise ValueError(in_str)
         for output in outputs:
-            output_solution = "0"  # didn't solve 0, so if it falls through it's zero
             for digit, solution in row.solved_digits.items():
                 if set(output) == solution:
-                    output_solution = str(digit)
+                    solution_list.append(str(digit))
                     break
-            solution_list.append(output_solution)
         row_solution = int("".join(solution_list))
-        print(row_solution)
         sum_ += row_solution
     return sum_
 
