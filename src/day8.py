@@ -1,7 +1,7 @@
 import pathlib
 from typing import Dict
 
-input_wires = ["a", "b", "c", "d", "e", "f", "g"]
+INPUT_WIRES = ["a", "b", "c", "d", "e", "f", "g"]
 
 
 class Row:
@@ -29,7 +29,7 @@ class Row:
 def is_zero(input_str: str, wire_counts, row: Row):
     if not len(input_str) == 6:
         return False
-    wire_set = set(input_wires)
+    wire_set = set(INPUT_WIRES)
     input_set = set(input_str)
     unlit_seg = (
         wire_set - input_set
@@ -131,7 +131,7 @@ def main():
 
 def count_wires(input_strings) -> Dict[str, int]:
     counts = {}
-    for wire in input_wires:
+    for wire in INPUT_WIRES:
         count = 0
         for input_ in input_strings:
             if wire in input_:
