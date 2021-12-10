@@ -23,7 +23,7 @@ class Row:
         try:
             self.unsolved_digits.pop(digit)
         except KeyError:
-            pass  # this happens dependent solvers
+            pass  # this happens for dependent solvers
 
 
 def is_zero(input_str: str, wire_counts, row: Row):
