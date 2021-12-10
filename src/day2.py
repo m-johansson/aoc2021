@@ -10,6 +10,7 @@ def command_generator(filepath: str):
             for cmd, distance in (str(row).strip().lower().split(" ") for row in in_)
         )
 
+
 def where_are_we(command_generator):
     forward = 0
     aim = 0
@@ -18,7 +19,7 @@ def where_are_we(command_generator):
         match command:
             case "forward":
                 forward += distance
-                depth = depth + distance*aim
+                depth = depth + distance * aim
             case "down":
                 aim += distance
             case "up":
@@ -28,5 +29,5 @@ def where_are_we(command_generator):
 
 if __name__ == "__main__":
     in_ = command_generator("inputs/day2.txt")
-    x,z = where_are_we(in_)
+    x, z = where_are_we(in_)
     print(f"horizontal {x}, depth {z}, product {x*z}")
