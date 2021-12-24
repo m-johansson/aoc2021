@@ -11,16 +11,37 @@ class Line:
         self._add_points()
 
     def _add_points(self):
-        if self._x0 == self._x1:
-            start = min(self._y0, self._y1)
-            stop = max(self._y0, self._y1)
-            self.coordinates.update(((self._x0, y) for y in range(start, stop + 1)))
-        elif self._y0 == self._y1:
-            start = min(self._x0, self._x1)
-            stop = max(self._x0, self._x1)
-            self.coordinates.update(((x, self._y0) for x in range(start, stop + 1)))
-        else:
-            pass
+        x_incline = self._get_incline(self._x0, self._x1)
+        y_incline = self._get_incline(self._y0, self._y1)
+        if x_incline and y_incline:
+            x_coords = range(self._x0, self._x1 + x_incline, x_incline)
+            y_coords = range(self._y0, self._y1 + y_incline, y_incline)
+            self.coordinates.update(zip(x_coords, y_coords, strict=True))
+        elif x_incline and not y_incline:
+            self.coordinates.update(
+                (
+                    (x, self._y0)
+                    for x in range(self._x0, self._x1 + x_incline, x_incline)
+                )
+            )
+        elif y_incline and not x_incline:
+            self.coordinates.update(
+                (
+                    (self._x0, y)
+                    for y in range(self._y0, self._y1 + y_incline, y_incline)
+                )
+            )
+        elif not x_incline and not y_incline:
+            # this line segment is just a point
+            self.coordinates.add((self._x0, self._y0))
+
+    def _get_incline(self, p0, p1):
+        if p0 == p1:
+            return 0
+        if p0 > p1:
+            return -1
+        if p0 < p1:
+            return 1
 
 
 def read_inputs():
